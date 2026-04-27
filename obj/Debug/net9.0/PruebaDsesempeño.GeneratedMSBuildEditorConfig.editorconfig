@@ -36,12 +36,28 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[/home/cohorte6/Desktop/Diego Prueba Desempeño/PruebaDsesempeño/PruebaDsesempeño/Views/Reservation/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVzZXJ2YXRpb24vSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/cohorte6/Desktop/Diego Prueba Desempeño/PruebaDsesempeño/PruebaDsesempeño/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/home/cohorte6/Desktop/Diego Prueba Desempeño/PruebaDsesempeño/PruebaDsesempeño/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/cohorte6/Desktop/Diego Prueba Desempeño/PruebaDsesempeño/PruebaDsesempeño/Views/Space/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU3BhY2UvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/cohorte6/Desktop/Diego Prueba Desempeño/PruebaDsesempeño/PruebaDsesempeño/Views/User/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlci9FZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/cohorte6/Desktop/Diego Prueba Desempeño/PruebaDsesempeño/PruebaDsesempeño/Views/User/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlci9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/home/cohorte6/Desktop/Diego Prueba Desempeño/PruebaDsesempeño/PruebaDsesempeño/Views/_ViewImports.cshtml]

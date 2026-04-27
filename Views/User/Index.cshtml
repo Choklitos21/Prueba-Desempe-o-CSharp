@@ -1,0 +1,129 @@
+@model PruebaDsesempeño.Models.UserViewModel
+
+@{
+    ViewData["Title"] = "Users";
+}
+
+<div class="max-w-7xl mx-auto space-y-8">
+    
+    <div class="flex justify-between items-center">
+        <div>
+            <h1 class="text-3xl font-bold">User Management</h1>
+            <p class="text-gray-500">Overview of users</p>
+        </div>
+    </div>
+    
+    <div class="bg-white p-6 rounded-xl shadow space-y-4">
+        
+        @if (TempData["Success"] == "true")
+        {
+            <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
+                <div class="flex">
+                    <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
+                    <div>
+                        <p class="font-bold">@TempData["Message"]</p>
+                    </div>
+                </div>
+            </div>
+        }
+        else if (TempData["Success"] == "false")
+        {
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                <strong class="font-bold">Holy smokes!</strong>
+                <span class="block sm:inline">@TempData["Message"]</span>
+                <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                    <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+                </span>
+            </div>
+        }
+
+        <h2 class="text-lg font-semibold text-gray-700">User Register</h2>
+
+        <form asp-controller="User" asp-action="Store" method="post" class="grid md:grid-cols-4 gap-4">
+
+            <div>
+                <label class="text-sm text-gray-500">Name</label>
+                <input type="text" name="Name"
+                       class="w-full mt-1 p-2 border rounded focus:ring-2 focus:ring-green-500 outline-none"
+                       placeholder="Juan Pérez"/>
+            </div>
+
+            <div>
+                <label class="text-sm text-gray-500">ID Number</label>
+                <input type="number" name="IDCard"
+                       class="w-full mt-1 p-2 border rounded focus:ring-2 focus:ring-green-500 outline-none"
+                       placeholder="10002347890"/>
+            </div>
+
+            <div>
+                <label class="text-sm text-gray-500">Phone</label>
+                <input type="number" name="Phone"
+                       class="w-full mt-1 p-2 border rounded focus:ring-2 focus:ring-green-500 outline-none"
+                       placeholder="3003245678"/>
+            </div>
+
+            <div>
+                <label class="text-sm text-gray-500">Email</label>
+                <input type="email" name="Email"
+                       class="w-full mt-1 p-2 border rounded focus:ring-2 focus:ring-green-500 outline-none"
+                       placeholder="user@MailKit.com"/>
+            </div>
+
+            <div class="md:col-span-4 flex justify-end">
+                <button type="submit"
+                        class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded transition">
+                    Create User
+                </button>
+            </div>
+
+        </form>
+    </div>
+    
+    <div class="bg-white rounded shadow overflow-hidden">
+
+        <table class="w-full">
+            <thead class="bg-gray-100 text-left">
+                <tr>
+                    <th class="p-4">Name</th>
+                    <th class="p-4">ID Number</th>
+                    <th class="p-4">Phone</th>
+                    <th class="p-4">Email</th>
+                    <th class="p-4">Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (Model.UserList != null && Model.UserList.Any())
+                {
+                    @foreach (var user in Model.UserList)
+                    {
+                        <tr class="border-t">
+                            <td class="p-4">@user.Name</td>
+                            <td class="p-4">@user.IDCard</td>
+                            <td class="p-4">@user.Phone</td>
+                            <td class="p-4">@user.Email</td>
+                            <td class="p-4">
+                                <a asp-action="Edit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                                    Edit
+                                </a>
+                                <form asp-controller="User" asp-action="Destroy">
+                                    <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">
+                                        Remove
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr class="border-t">
+                        <td>No users registered yet.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+
+</div>

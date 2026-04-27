@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using PruebaDsesempeño.Data;
 using PruebaDsesempeño.Models;
+using PruebaDsesempeño.Response;
 using PruebaDsesempeño.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,13 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 
-
-
-/*
-builder.Services.AddScoped<BookService>();
 builder.Services.AddScoped<UserService>();
-builder.Services.AddScoped<LoanService>();
-*/
 
 builder.Services.Configure<SmtpSettings>(
     builder.Configuration.GetSection("SmtpSettings")

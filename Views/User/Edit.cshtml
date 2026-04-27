@@ -1,0 +1,62 @@
+@model PruebaDsesempeño.Models.UserViewModel
+
+@{
+    ViewBag.Title = "Edit User";
+}
+
+<div class="max-w-3xl mx-auto">
+
+    <h1 class="text-2xl font-bold mb-6">Edit User</h1>
+
+    <div class="bg-white p-6 rounded-xl shadow">
+
+        <form asp-controller="User" asp-action="Edit" method="post" class="grid md:grid-cols-4 gap-4">
+            
+            <input type="hidden" asp-for="Id" />
+            
+            <div>
+                <label class="text-sm text-gray-500">Name</label>
+                <input asp-for="Nombre"
+                       class="w-full mt-1 p-2 border rounded focus:ring-2 focus:ring-green-500 outline-none"
+                       placeholder="Juan Pérez"/>
+            </div>
+
+            <!-- ID Number -->
+            <div>
+                <label class="text-sm text-gray-500">ID Number</label>
+                <input asp-for="IDCard"
+                       type="number"
+                       class="w-full mt-1 p-2 border rounded focus:ring-2 focus:ring-green-500 outline-none"
+                       placeholder="10002347890"/>
+            </div>
+
+            <!-- Phone -->
+            <div>
+                <label class="text-sm text-gray-500">Phone</label>
+                <input asp-for="Telefono"
+                       type="number"
+                       class="w-full mt-1 p-2 border rounded focus:ring-2 focus:ring-green-500 outline-none"
+                       placeholder="3003245678"/>
+            </div>
+
+            <!-- Email -->
+            <div>
+                <label class="text-sm text-gray-500">Email</label>
+                <input asp-for="Email"
+                       type="email"
+                       class="w-full mt-1 p-2 border rounded focus:ring-2 focus:ring-green-500 outline-none"
+                       placeholder="user@mail.com"/>
+            </div>
+
+            <!-- BOTÓN -->
+            <div class="md:col-span-4 flex justify-end">
+                <button type="submit"
+                        class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded transition">
+                    Save Changes
+                </button>
+            </div>
+
+        </form>
+    </div>
+
+</div>
