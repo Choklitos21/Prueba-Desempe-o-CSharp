@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using PruebaDsesempeño.Data;
 using PruebaDsesempeño.Models;
-using PruebaDsesempeño.Response;
 using PruebaDsesempeño.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +11,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<SpaceService>();
+builder.Services.AddScoped<ReservationService>();
 
 builder.Services.Configure<SmtpSettings>(
     builder.Configuration.GetSection("SmtpSettings")

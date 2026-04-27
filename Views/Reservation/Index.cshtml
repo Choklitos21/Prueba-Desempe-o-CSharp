@@ -1,0 +1,177 @@
+@model PruebaDsesempeño.Models.ReservationViewModel
+
+@{
+    ViewData["Title"] = "Reservations";
+    var today = DateTime.Today.ToString("yyyy-MM-dd");
+}
+
+<div class="max-w-7xl mx-auto space-y-8">
+    
+    <div class="flex justify-between items-center">
+        <div>
+            <h1 class="text-3xl font-bold">Reservations Management</h1>
+            <p class="text-gray-500">Overview of reservations</p>
+        </div>
+    </div>
+    
+    <div class="bg-white p-6 rounded-xl shadow space-y-4">
+        
+        @if (TempData["Success"] == "true")
+        {
+            <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
+                <div class="flex">
+                    <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
+                    <div>
+                        <p class="font-bold">@TempData["Message"]</p>
+                    </div>
+                </div>
+            </div>
+        }
+        else if (TempData["Success"] == "false")
+        {
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                <strong class="font-bold">Holy smokes!</strong>
+                <span class="block sm:inline">@TempData["Message"]</span>
+                <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                    <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+                </span>
+            </div>
+        }
+
+        <h2 class="text-lg font-semibold text-gray-700">Reservation Register</h2>
+
+        <form asp-controller="Reservation" asp-action="Store" method="post" class="grid md:grid-cols-4 gap-4">
+
+            <label class="block text-sm font-medium text-gray-700 mb-1">User</label>
+            <select name="userId" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-gray-800 outline-none mb-4">
+                @if (Model.UserList != null && Model.UserList.Any())
+                {
+                    <option value="" disabled selected>Select a user</option>
+                    @foreach (var user in Model.UserList)
+                    {
+                        <option value="@user.Id">@user.Name | @user.IDCard</option>
+                    }
+                }
+                else
+                {
+                    <option value="" disabled selected>No users yet</option>
+                }
+                
+            </select>
+
+            <label class="block text-sm font-medium text-gray-700 mb-1">Space</label>
+            <select name="spaceId" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-gray-800 outline-none mb-4">
+                @if (Model.SpaceList != null && Model.SpaceList.Any())
+                {
+                    <option value="">Select a space</option>
+                    @foreach (var space in Model.SpaceList)
+                    {
+                        <option value="@space.Id">@space.Name | @space.Type | capacity: @space.Capacity</option>
+                    }
+                }
+                else
+                {
+                    <option value="" disabled selected>No spaces yet</option>
+                }
+                
+            </select>
+
+            <div class="mb-3">
+                <label class="form-label">Start Date</label>
+                <input name="StartDate"
+                       id="StartDate"
+                       type="date"
+                       class="form-control"
+                       min="@today" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">End Date</label>
+                <input name="EndDate"
+                       id="EndDate"
+                       type="date"
+                       class="form-control"
+                       min="@today" />
+            </div>
+
+            <div class="md:col-span-4 flex justify-end">
+                <button type="submit"
+                        class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded transition">
+                    Create Reservation
+                </button>
+            </div>
+
+        </form>
+    </div>
+    
+    <div class="bg-white rounded shadow overflow-hidden">
+
+        <table class="w-full">
+            <thead class="bg-gray-100 text-left">
+            <tr>
+                <th class="p-4">Space Name</th>
+                <th class="p-4">Belong to User</th>
+                <th class="p-4">Start Date</th>
+                <th class="p-4">End Date</th>
+                <th class="p-4">Status</th>
+                <th class="p-4">Actions</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            @if (Model.ReservationList != null && Model.ReservationList.Any())
+            {
+                @foreach (var reservation in Model.ReservationList)
+                {
+                    <tr class="border-t">
+                        <td class="p-4">@reservation.Space.Name</td>
+                        <td class="p-4">@reservation.User.FirstOrDefault()?.Name</td>
+                        <td class="p-4">@reservation.StartDate.ToString("dd/MM/yyyy HH:mm:ss")</td>
+                        <td class="p-4">@reservation.EndDate.ToString("dd/MM/yyyy HH:mm:ss")</td>
+                        <td class="p-4">
+                            <a asp-controller="Reservation" 
+                               asp-action="Edit" 
+                               asp-route-id="@reservation.Id"
+                               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                                Edit
+                            </a>
+                            <form asp-controller="Reservation" 
+                                  asp-action="CancelReservation"
+                                  asp-route-id="@reservation.Id">
+                                <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">
+                                    Cancel Reservation
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr class="border-t">
+                    <td>No reservations yet.</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    <script>
+        const startInput = document.getElementById('StartDate');
+        const endInput = document.getElementById('EndDate');
+
+        startInput.addEventListener('change', () => {
+            if (startInput.value) {
+                endInput.min = startInput.value;
+                
+                if (endInput.value && endInput.value < startInput.value) {
+                    endInput.value = '';
+                }
+            }
+        });
+    </script>
+}

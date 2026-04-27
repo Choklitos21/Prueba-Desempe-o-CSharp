@@ -1,9 +1,11 @@
+using PruebaDsesempeño.Enums;
+
 namespace PruebaDsesempeño.Models;
 
 public class Reservation
 {
     public int Id { get; set; }
-    
+    public ReservationStatus Status { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
     

@@ -47,10 +47,10 @@
             <h2 class="font-bold mb-6">Arena Manager</h2>
 
             <nav class="space-y-2">
-                <a href="#" class="block p-2 hover:bg-gray-100 rounded">Dashboard</a>
+                <a asp-controller="Home" asp-action="Index" class="block p-2 hover:bg-gray-100 rounded">Dashboard</a>
                 <a asp-controller="User" asp-action="Index" class="block p-2 bg-green-100 text-green-600 rounded">Users</a>
                 <a asp-controller="Space" asp-action="Index" class="block p-2 hover:bg-gray-100 rounded">Spaces</a>
-                <a href="#" class="block p-2 hover:bg-gray-100 rounded">Bookings</a>
+                <a asp-controller="Reservation" asp-action="Index" class="block p-2 hover:bg-gray-100 rounded">Reservations</a>
             </nav>
 
         </aside>
@@ -61,6 +61,6 @@
         </main>
 
     </div>
-
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
