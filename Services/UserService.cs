@@ -44,4 +44,64 @@ public class UserService
             true
             );
     }
+
+    public async Task<ResponseService<User>> FindUserById(int id)
+    {
+        var user = await _context.User.FirstOrDefaultAsync(u => u.Id == id);
+
+        if (user == null)
+        {
+            return new ResponseService<User>(
+                null,
+                "User not found",
+                false
+            );
+        }
+        
+        return new ResponseService<User>(
+            user,
+            "User found",
+            true
+        );
+    }
+    
+    public async Task<ResponseService<User>> UpdateUser(User newUser)
+    {
+        var oldUser = await _context.User.FirstOrDefaultAsync(x => x.Id == newUser.Id);
+        
+        if (oldUser != null)
+        {
+            _context.Entry(oldUser).CurrentValues.SetValues(newUser);
+            await _context.SaveChangesAsync();
+            return new ResponseService<User>(
+                newUser,
+                "User updated correctly",
+                true);
+        }
+        
+        return new ResponseService<User>(
+            newUser,
+            "User not found",
+            false); 
+    }
+    
+    public async Task<ResponseService<User>> DeleteUser(int id)
+    {
+        var oldUser = await _context.User.FirstOrDefaultAsync(x => x.Id == id);
+        
+        if (oldUser != null)
+        {
+            _context.Remove(oldUser);
+            await _context.SaveChangesAsync();
+            return new ResponseService<User>(
+                oldUser,
+                "User removed",
+                true);
+        }
+        
+        return new ResponseService<User>(
+            oldUser,
+            "User not found",
+            false);
+    }
 }

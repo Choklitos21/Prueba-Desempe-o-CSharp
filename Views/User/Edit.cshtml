@@ -1,4 +1,4 @@
-@model PruebaDsesempeño.Models.UserViewModel
+@model PruebaDsesempeño.Models.User
 
 @{
     ViewBag.Title = "Edit User";
@@ -10,13 +10,13 @@
 
     <div class="bg-white p-6 rounded-xl shadow">
 
-        <form asp-controller="User" asp-action="Edit" method="post" class="grid md:grid-cols-4 gap-4">
+        <form asp-controller="User" asp-action="EditUser" method="post" class="grid md:grid-cols-4 gap-4">
             
-            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="@Model.Id" />
             
             <div>
                 <label class="text-sm text-gray-500">Name</label>
-                <input asp-for="Nombre"
+                <input asp-for="@Model.Name"
                        class="w-full mt-1 p-2 border rounded focus:ring-2 focus:ring-green-500 outline-none"
                        placeholder="Juan Pérez"/>
             </div>
@@ -24,7 +24,7 @@
             <!-- ID Number -->
             <div>
                 <label class="text-sm text-gray-500">ID Number</label>
-                <input asp-for="IDCard"
+                <input asp-for="@Model.IDCard"
                        type="number"
                        class="w-full mt-1 p-2 border rounded focus:ring-2 focus:ring-green-500 outline-none"
                        placeholder="10002347890"/>
@@ -33,7 +33,7 @@
             <!-- Phone -->
             <div>
                 <label class="text-sm text-gray-500">Phone</label>
-                <input asp-for="Telefono"
+                <input asp-for="@Model.Phone"
                        type="number"
                        class="w-full mt-1 p-2 border rounded focus:ring-2 focus:ring-green-500 outline-none"
                        placeholder="3003245678"/>
@@ -42,14 +42,16 @@
             <!-- Email -->
             <div>
                 <label class="text-sm text-gray-500">Email</label>
-                <input asp-for="Email"
+                <input asp-for="@Model.Email"
                        type="email"
                        class="w-full mt-1 p-2 border rounded focus:ring-2 focus:ring-green-500 outline-none"
                        placeholder="user@mail.com"/>
             </div>
-
-            <!-- BOTÓN -->
+            
             <div class="md:col-span-4 flex justify-end">
+                <a asp-controller="User" asp-action="Index" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                    Cancel
+                </a>
                 <button type="submit"
                         class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded transition">
                     Save Changes

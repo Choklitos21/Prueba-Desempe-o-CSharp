@@ -11,6 +11,7 @@ builder.Services.AddControllersWithViews();
 
 
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<SpaceService>();
 
 builder.Services.Configure<SmtpSettings>(
     builder.Configuration.GetSection("SmtpSettings")

@@ -3,7 +3,7 @@ namespace PruebaDsesempeño.Enums;
 public enum SpaceType
 {
     Soccer,
-    Futball,
+    Football,
     Basketball,
     Tennis,
     Squash,

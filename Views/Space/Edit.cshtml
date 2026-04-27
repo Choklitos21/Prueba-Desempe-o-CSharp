@@ -1,0 +1,61 @@
+@model PruebaDsesempeño.Models.Space
+
+@{
+    ViewBag.Title = "Edit Space";
+}
+
+<div class="max-w-3xl mx-auto">
+
+    <h1 class="text-2xl font-bold mb-6">Edit Space</h1>
+
+    <div class="bg-white p-6 rounded-xl shadow">
+
+        <form asp-controller="Space" asp-action="EditSpace" method="post" class="grid md:grid-cols-4 gap-4">
+            
+            <input type="hidden" asp-for="@Model.Id" />
+            
+            <div>
+                <label class="text-sm text-gray-500">Name</label>
+                <input asp-for="@Model.Name"
+                       class="w-full mt-1 p-2 border rounded focus:ring-2 focus:ring-green-500 outline-none"
+                       placeholder="Amazing Space"/>
+            </div>
+            
+            <div>
+                
+                <label class="text-sm text-gray-500">Type</label>
+                <select asp-for="@Model.Type" class="form-control">
+                    <option value="" disabled selected>Select an option</option>
+                    <option value="1">Soccer</option>
+                    <option value="2">Football</option>
+                    <option value="3">Basketball</option>
+                    <option value="4">Tennis</option>
+                    <option value="5">Squash</option>
+                    <option value="6">Archery</option>
+                    <option value="7">Volley</option>
+                </select>
+            </div>
+
+            <!-- Phone -->
+            <div>
+                <label class="text-sm text-gray-500">Capacity</label>
+                <input asp-for="@Model.Capacity"
+                       type="number"
+                       class="w-full mt-1 p-2 border rounded focus:ring-2 focus:ring-green-500 outline-none"
+                       placeholder="1-20"/>
+            </div>
+            
+            <div class="md:col-span-4 flex justify-end">
+                <a asp-controller="Space" asp-action="Index" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                    Cancel
+                </a>
+                <button type="submit"
+                        class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded transition">
+                    Save Changes
+                </button>
+            </div>
+
+        </form>
+    </div>
+
+</div>

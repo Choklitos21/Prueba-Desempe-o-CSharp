@@ -28,11 +28,44 @@ public class UserController: Controller
     [HttpPost]
     public async Task<IActionResult> Store(User user)
     {
-        var response = await _userService.CreateUser(user);
+        if (ModelState.IsValid)
+        {
+            var response = await _userService.CreateUser(user);
         
-        TempData["Success"] = response.Success.ToString();
-        TempData["Message"] = response.Message;
+            TempData["Success"] = response.Success.ToString();
+            TempData["Message"] = response.Message;
+        }
 
+        return RedirectToAction("Index");
+    }
+    
+    public async Task<IActionResult> Edit(int id)
+    {
+        var user = await _userService.FindUserById(id);
+        
+        return View(user.Data);
+    }
+    
+    public async Task<IActionResult> EditUser(User newUser)
+    {
+        if (ModelState.IsValid)
+        {
+            var response = await _userService.UpdateUser(newUser);
+            TempData["Success"] = response.Success.ToString();
+            TempData["Message"] = response.Message;
+        }
+
+        return RedirectToAction("Index");
+    }
+    
+    [HttpPost]
+    public async Task<IActionResult> DeleteUser(int id)
+    {
+        var response = await _userService.DeleteUser(id);
+        
+        TempData["Success"] = response.Message;
+        TempData["Message"] = response.Success.ToString();
+        
         return RedirectToAction("Index");
     }
 }
