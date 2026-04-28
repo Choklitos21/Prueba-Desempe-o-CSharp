@@ -42,15 +42,45 @@
     <div class="flex">
 
         <!-- SIDEBAR -->
+        <!-- SIDEBAR -->
         <aside class="w-64 min-h-screen border-r bg-white p-4 hidden md:block">
 
             <h2 class="font-bold mb-6">Arena Manager</h2>
 
             <nav class="space-y-2">
-                <a asp-controller="Home" asp-action="Index" class="block p-2 hover:bg-gray-100 rounded">Dashboard</a>
-                <a asp-controller="User" asp-action="Index" class="block p-2 bg-green-100 text-green-600 rounded">Users</a>
-                <a asp-controller="Space" asp-action="Index" class="block p-2 hover:bg-gray-100 rounded">Spaces</a>
-                <a asp-controller="Reservation" asp-action="Index" class="block p-2 hover:bg-gray-100 rounded">Reservations</a>
+
+                <a asp-controller="Home" asp-action="Index"
+                   class="block p-2 rounded 
+           @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Home" 
+               ? "bg-green-100 text-green-600 font-medium" 
+               : "hover:bg-gray-100")">
+                    Dashboard
+                </a>
+
+                <a asp-controller="User" asp-action="Index"
+                   class="block p-2 rounded 
+           @(ViewContext.RouteData.Values["Controller"]?.ToString() == "User" 
+               ? "bg-green-100 text-green-600 font-medium" 
+               : "hover:bg-gray-100")">
+                    Users
+                </a>
+
+                <a asp-controller="Space" asp-action="Index"
+                   class="block p-2 rounded 
+           @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Space" 
+               ? "bg-green-100 text-green-600 font-medium" 
+               : "hover:bg-gray-100")">
+                    Spaces
+                </a>
+
+                <a asp-controller="Reservation" asp-action="Index"
+                   class="block p-2 rounded 
+           @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Reservation" 
+               ? "bg-green-100 text-green-600 font-medium" 
+               : "hover:bg-gray-100")">
+                    Reservations
+                </a>
+
             </nav>
 
         </aside>

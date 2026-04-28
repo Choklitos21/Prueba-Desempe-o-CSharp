@@ -15,10 +15,10 @@ public class SpaceController: Controller
     
     public async Task<IActionResult> Index()
     {
-        var Spaces = await _spaceService.GetAllSpaces();
+        var spaces = await _spaceService.GetAllSpaces();
         var viewModel = new SpaceViewModel()
         {
-            SpaceList = Spaces.Data,
+            SpaceList = spaces.Data,
             Space = new Space()
         };
         return View(viewModel);
@@ -69,8 +69,8 @@ public class SpaceController: Controller
     {
         var response = await _spaceService.DeleteSpace(id);
         
-        TempData["Success"] = response.Message;
         TempData["Message"] = response.Success.ToString();
+        TempData["Success"] = response.Message;
         
         return RedirectToAction("Index");
     }

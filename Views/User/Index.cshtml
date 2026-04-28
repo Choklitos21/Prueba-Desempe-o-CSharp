@@ -15,7 +15,7 @@
     
     <div class="bg-white p-6 rounded-xl shadow space-y-4">
         
-        @if (TempData["Success"] == "true")
+        @if (TempData["Success"] != null)
         {
             <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
                 <div class="flex">
@@ -24,16 +24,6 @@
                         <p class="font-bold">@TempData["Message"]</p>
                     </div>
                 </div>
-            </div>
-        }
-        else if (TempData["Success"] == "false")
-        {
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-                <strong class="font-bold">Holy smokes!</strong>
-                <span class="block sm:inline">@TempData["Message"]</span>
-                <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
-                    <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
-                </span>
             </div>
         }
 
@@ -50,7 +40,7 @@
 
             <div>
                 <label class="text-sm text-gray-500">ID Number</label>
-                <input type="number" name="IDCard"
+                <input type="text" name="IDCard"
                        class="w-full mt-1 p-2 border rounded focus:ring-2 focus:ring-green-500 outline-none"
                        placeholder="10002347890"/>
             </div>
@@ -103,19 +93,25 @@
                             <td class="p-4">@user.Phone</td>
                             <td class="p-4">@user.Email</td>
                             <td class="p-4">
-                                <a asp-controller="User" 
-                                   asp-action="Edit" 
-                                   asp-route-id="@user.Id"
-                                   class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-                                    Edit
-                                </a>
-                                <form asp-controller="User" 
-                                      asp-action="DeleteUser"
-                                      asp-route-id="@user.Id">
-                                    <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">
-                                        Remove
-                                    </button>
-                                </form>
+                                <div class="flex items-center gap-2">
+
+                                    <a asp-controller="User"
+                                       asp-action="Edit"
+                                       asp-route-id="@user.Id"
+                                       class="bg-green-500 hover:bg-green-600 text-white text-sm font-medium px-4 py-2 rounded-lg transition">
+                                        Edit
+                                    </a>
+
+                                    <form asp-controller="User"
+                                          asp-action="DeleteUser"
+                                          asp-route-id="@user.Id">
+                                        <button type="submit"
+                                                class="bg-red-500 hover:bg-red-600 text-white text-sm font-medium px-4 py-2 rounded-lg transition">
+                                            Remove
+                                        </button>
+                                    </form>
+
+                                </div>
                             </td>
                         </tr>
                     }
