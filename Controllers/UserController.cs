@@ -14,6 +14,7 @@ public class UserController: Controller
         _userService = userService;
     }
     
+    // Controller to go at main view Index, where the creation form and the table with all users can be found
     public async Task<IActionResult> Index()
     {
         var users = await _userService.GetAllUsers();
@@ -25,6 +26,7 @@ public class UserController: Controller
         return View(viewModel);
     }
     
+    // Controller method to create a new user, it only calls the service and reload the Index view
     [HttpPost]
     public async Task<IActionResult> Store(User user)
     {
@@ -39,6 +41,7 @@ public class UserController: Controller
         return RedirectToAction("Index");
     }
     
+    // Controller that will send the user data to the Edit view
     public async Task<IActionResult> Edit(int id)
     {
         var user = await _userService.FindUserById(id);
@@ -46,6 +49,7 @@ public class UserController: Controller
         return View(user.Data);
     }
     
+    // Controller that calls the update method inside UserService and redirect to the Index view afterward
     public async Task<IActionResult> EditUser(User newUser)
     {
         if (ModelState.IsValid)
@@ -58,6 +62,7 @@ public class UserController: Controller
         return RedirectToAction("Index");
     }
     
+    // Controller method that calls the delete method inside UserService and redirect to the Index view afterward
     [HttpPost]
     public async Task<IActionResult> DeleteUser(int id)
     {

@@ -13,6 +13,7 @@ public class SpaceController: Controller
         _spaceService = spaceService;
     }
     
+    // Controller to go at main view Index, where the creation form and the table with all spaces can be found
     public async Task<IActionResult> Index()
     {
         var spaces = await _spaceService.GetAllSpaces();
@@ -24,6 +25,7 @@ public class SpaceController: Controller
         return View(viewModel);
     }
     
+    // Controller method to create a new space, it only calls the service and reload the Index view
     [HttpPost]
     public async Task<IActionResult> Store(Space space)
     {
@@ -45,6 +47,7 @@ public class SpaceController: Controller
         return RedirectToAction("Index");
     }
     
+    // Controller that will send the space data to the Edit view
     public async Task<IActionResult> Edit(int id)
     {
         var space = await _spaceService.FindSpaceById(id);
@@ -52,6 +55,7 @@ public class SpaceController: Controller
         return View(space.Data);
     }
     
+    // Controller that calls the update method inside SpaceService and redirect to the Index view afterward
     public async Task<IActionResult> EditSpace(Space newSpace)
     {
         if (ModelState.IsValid)
@@ -64,6 +68,7 @@ public class SpaceController: Controller
         return RedirectToAction("Index");
     }
     
+    // Controller method that calls the delete method inside SpaceService and redirect to the Index view afterward
     [HttpPost]
     public async Task<IActionResult> DeleteSpace(int id)
     {

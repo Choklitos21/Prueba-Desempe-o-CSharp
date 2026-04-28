@@ -14,6 +14,7 @@ public class ReservationController: Controller
         _reservationService = reservationService;
     }
     
+    // Controller to go at main view Index, where the creation form and the table with all reservations can be found
     public async Task<IActionResult> Index()
     {
         var reservations = await _reservationService.GetAllReservations();
@@ -29,6 +30,7 @@ public class ReservationController: Controller
         return View(viewModel);
     }
     
+    // Controller method to create a new reservation, it only calls the service and reload the Index view
     [HttpPost]
     public async Task<IActionResult> Store(int userId, int spaceId, DateTime date, DateTime startTime, DateTime endTime)
     {
@@ -40,6 +42,7 @@ public class ReservationController: Controller
         return RedirectToAction("Index");
     }
     
+    // Controller that will send the reservation data to the Edit view
     public async Task<IActionResult> Edit(int id)
     {
         var user = await _reservationService.FindReservationById(id);
@@ -47,6 +50,7 @@ public class ReservationController: Controller
         return View(user.Data);
     }
     
+    // Controller that calls the update method inside ReservationService and redirect to the Index view afterward
     public async Task<IActionResult> EditReservation(int Id, ReservationStatus? Status, DateTime? Date, DateTime? StartTime, DateTime? EndTime)
     {
         var response = await _reservationService.UpdateReservation(Id, Status, Date, StartTime, EndTime);
@@ -56,6 +60,7 @@ public class ReservationController: Controller
         return RedirectToAction("Index");
     }
     
+    // Controller method that calls the delete method inside ReservationService and redirect to the Index view afterward
     [HttpPost]
     public async Task<IActionResult> CancelReservation(int id)
     {

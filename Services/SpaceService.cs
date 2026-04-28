@@ -14,6 +14,7 @@ public class SpaceService
         _context = context;
     }
 
+    // Method to retrieve all spaces from the database, if there's none user saved yet, it will return null
     public async Task<ResponseService<List<Space>>> GetAllSpaces()
     {
         try
@@ -33,6 +34,9 @@ public class SpaceService
         }
     }
 
+    // Create a new space
+    // This method first validate if there's any other space with the same name
+    // If there's any with the same name, it will return an error message
     public async Task<ResponseService<Space>> CreateSpace(Space space)
     {
         try
@@ -68,6 +72,8 @@ public class SpaceService
         
     }
 
+    // Method to find a space by his ID
+    // If not found, it will return an error message
     public async Task<ResponseService<Space>> FindSpaceById(int id)
     {
         try
@@ -99,6 +105,8 @@ public class SpaceService
         }
     }
     
+    // Method to update a space
+    // It can update 1 or more parts of the space, not all is requested
     public async Task<ResponseService<Space>> UpdateSpace(Space newSpace)
     {
         try
@@ -131,6 +139,9 @@ public class SpaceService
         
     }
     
+    // Delete a space from the DB
+    // This method first validate that the space exists, if so, it will be removed from the DB
+    // If not found, it will return an error message
     public async Task<ResponseService<Space>> DeleteSpace(int id)
     {
         try

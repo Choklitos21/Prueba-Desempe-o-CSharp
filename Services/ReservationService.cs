@@ -17,6 +17,8 @@ public class ReservationService
         _emailService = emailService;
     }
 
+    // Method to retrieve all users and spaces from the database, if there are none saved yet, it will return null
+    // This method is used to show all users and spaces in the select inputs from the Index view
     public async Task<ResponseService<Dictionary<string, Object>>> GetUsersAndSpaces()
     {
         try
@@ -43,6 +45,7 @@ public class ReservationService
         
     }
 
+    // Method to retrieve all reservations from the database, if there's none user saved yet, it will return null
     public async Task<ResponseService<List<Reservation>>> GetAllReservations()
     {
         try
@@ -67,6 +70,10 @@ public class ReservationService
         
     }
 
+    // Method to create a new reservation
+    // This method first validate that the userId and SpaceId are correct, and they exist
+    // If one of them doesn't exist, it will return a error message
+    // It also validates that the new reservation doesn't have any scheduling issues with other reservers made previusly
     public async Task<ResponseService<Reservation>> CreateReservation(int userId, int spaceId, DateTime date, DateTime startTime, DateTime endTime)
     {
         try
@@ -131,6 +138,8 @@ public class ReservationService
         }
     }
 
+    // Method to find a reservation by his ID
+    // If not found, it will return an error message
     public async Task<ResponseService<Reservation>> FindReservationById(int id)
     {
         try
@@ -162,6 +171,10 @@ public class ReservationService
         }
     }
     
+    // Method to update a reservation
+    // It can update the status, date, startTime, endTime only
+    // User and Space cannot be changed
+    // In case of need to change user, it has to create a new Reservation
     public async Task<ResponseService<Reservation>> UpdateReservation(int Id, ReservationStatus? status, DateTime? date, DateTime? startTime, DateTime? endTime)
     {
         try
@@ -211,6 +224,8 @@ public class ReservationService
         }
     }
     
+    // Method to change the status of the reservation to Canceled
+    // Reservations cannot be deleted, only change to canceled status
     public async Task<ResponseService<Reservation>> CancelReservation(int id)
     {
         try

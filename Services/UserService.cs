@@ -13,7 +13,8 @@ public class UserService
     {
         _context = context;
     }
-
+    
+    // Method to retrieve all users from the database, if there's none user saved yet, it will return null
     public async Task<ResponseService<List<User>>> GetAllUsers()
     {
         try
@@ -33,6 +34,7 @@ public class UserService
         }
     }
 
+    // Create a new user verifying that the C.C or Email are not registered before
     public async Task<ResponseService<User>> CreateUser(User user)
     {
         try
@@ -67,6 +69,7 @@ public class UserService
         
     }
 
+    // Try to find a user for his ID, if not found, it will return an error message with null as data
     public async Task<ResponseService<User>> FindUserById(int id)
     {
         try
@@ -100,6 +103,8 @@ public class UserService
         
     }
     
+    // Method to update an old user with new information
+    // It can update 1 or more parts of the user, not all is requested
     public async Task<ResponseService<User>> UpdateUser(User newUser)
     {
         try
@@ -130,6 +135,9 @@ public class UserService
         }
     }
     
+    // Delete a user from the DB
+    // This method first validate that the user exists, if so, it will be removed from the DB
+    // If not found, it will return an error message
     public async Task<ResponseService<User>> DeleteUser(int id)
     {
         try
