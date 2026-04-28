@@ -1,0 +1,64 @@
+@model PruebaDsesempeño.Models.Reservation
+
+@{
+    ViewBag.Title = "Edit Reservation";
+}
+
+<div class="max-w-3xl mx-auto">
+
+    <h1 class="text-2xl font-bold mb-6">Edit Reservation</h1>
+
+    <div class="bg-white p-6 rounded-xl shadow">
+
+        <form asp-controller="Reservation" asp-action="EditReservation" method="post" class="grid md:grid-cols-4 gap-4">
+            
+            <input type="hidden" asp-for="@Model.Id" name="Id"/>
+            
+            <div>
+                <label class="text-sm text-gray-500">Status</label>
+                <select asp-for="@Model.Status" class="form-control" name="Status">
+                    <option value="" disabled>Select an option</option>
+                    <option value="1">Canceled</option>
+                    <option value="2">Confirmed</option>
+                    <option value="3">Finished</option>
+                </select>
+            </div>
+            
+            <div>
+                <label class="text-sm text-gray-500">Date</label>
+                <input asp-for="@Model.Date"
+                       type="date"
+                       name="Date"
+                       class="w-full mt-1 p-2 border rounded focus:ring-2 focus:ring-green-500 outline-none"/>
+            </div>
+            
+            <div>
+                <label class="text-sm text-gray-500">Start Time</label>
+                <input asp-for="@Model.StartTime"
+                       type="time"
+                       name="StartTime"
+                       class="w-full mt-1 p-2 border rounded focus:ring-2 focus:ring-green-500 outline-none"/>
+            </div>
+            
+            <div>
+                <label class="text-sm text-gray-500">End Time</label>
+                <input asp-for="@Model.EndTime"
+                       type="time"
+                       name="EndDate"
+                       class="w-full mt-1 p-2 border rounded focus:ring-2 focus:ring-green-500 outline-none"/>
+            </div>
+            
+            <div class="md:col-span-4 flex justify-end">
+                <a asp-controller="Reservation" asp-action="Index" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                    Cancel
+                </a>
+                <button type="submit"
+                        class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded transition">
+                    Save Changes
+                </button>
+            </div>
+
+        </form>
+    </div>
+
+</div>

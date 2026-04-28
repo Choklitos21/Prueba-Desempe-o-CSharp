@@ -6,13 +6,15 @@ public class Reservation
 {
     public int Id { get; set; }
     public ReservationStatus Status { get; set; }
-    public DateTime StartDate { get; set; }
-    public DateTime EndDate { get; set; }
+    
+    public DateTime Date { get; set; }
+    public DateTime StartTime { get; set; }
+    public DateTime EndTime { get; set; }
     
     public int SpaceId { get; set; }
     public Space Space { get; set; }
     
-    public IEnumerable<User> User { get; set; } = new List<User>();
+    public ICollection<User> User { get; set; } = new List<User>();
     
 
 }

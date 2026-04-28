@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using PruebaDsesempeño.Enums;
 using PruebaDsesempeño.Models;
 using PruebaDsesempeño.Services;
 
@@ -29,15 +30,12 @@ public class ReservationController: Controller
     }
     
     [HttpPost]
-    public async Task<IActionResult> Store(Reservation reservation)
+    public async Task<IActionResult> Store(int userId, int spaceId, DateTime date, DateTime startTime, DateTime endTime)
     {
-        if (ModelState.IsValid)
-        {
-            var response = await _reservationService.CreateReservation(reservation);
-        
-            TempData["Success"] = response.Success.ToString();
-            TempData["Message"] = response.Message;
-        }
+        var response = await _reservationService.CreateReservation(userId, spaceId, date, startTime, endTime);
+
+        TempData["Success"] = response.Success.ToString();
+        TempData["Message"] = response.Message;
 
         return RedirectToAction("Index");
     }
@@ -49,15 +47,12 @@ public class ReservationController: Controller
         return View(user.Data);
     }
     
-    public async Task<IActionResult> EditReservation(Reservation newReservation)
+    public async Task<IActionResult> EditReservation(int Id, ReservationStatus? Status, DateTime? Date, DateTime? StartTime, DateTime? EndTime)
     {
-        if (ModelState.IsValid)
-        {
-            var response = await _reservationService.UpdateReservation(newReservation);
-            TempData["Success"] = response.Success.ToString();
-            TempData["Message"] = response.Message;
-        }
-
+        var response = await _reservationService.UpdateReservation(Id, Status, Date, StartTime, EndTime);
+        TempData["Success"] = response.Success.ToString();
+        TempData["Message"] = response.Message;
+            
         return RedirectToAction("Index");
     }
     

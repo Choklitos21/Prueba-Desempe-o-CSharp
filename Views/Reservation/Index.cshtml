@@ -1,8 +1,10 @@
+@using PruebaDsesempeño.Enums
 @model PruebaDsesempeño.Models.ReservationViewModel
 
 @{
     ViewData["Title"] = "Reservations";
     var today = DateTime.Today.ToString("yyyy-MM-dd");
+    var now = DateTime.Now.ToString("HH:mm:ss");
 }
 
 <div class="max-w-7xl mx-auto space-y-8">
@@ -77,8 +79,8 @@
             </select>
 
             <div class="mb-3">
-                <label class="form-label">Start Date</label>
-                <input name="StartDate"
+                <label class="form-label">Date</label>
+                <input name="Date"
                        id="StartDate"
                        type="date"
                        class="form-control"
@@ -86,12 +88,19 @@
             </div>
 
             <div class="mb-3">
-                <label class="form-label">End Date</label>
-                <input name="EndDate"
-                       id="EndDate"
-                       type="date"
-                       class="form-control"
-                       min="@today" />
+                <label class="form-label">Start Time</label>
+                <input name="StartTime"
+                       id="StartTime"
+                       type="time"
+                       class="form-control"/>
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label">End Time</label>
+                <input name="EndTime"
+                       id="EndTime"
+                       type="time"
+                       class="form-control"/>
             </div>
 
             <div class="md:col-span-4 flex justify-end">
@@ -111,8 +120,9 @@
             <tr>
                 <th class="p-4">Space Name</th>
                 <th class="p-4">Belong to User</th>
-                <th class="p-4">Start Date</th>
-                <th class="p-4">End Date</th>
+                <th class="p-4">Date</th>
+                <th class="p-4">Start Time</th>
+                <th class="p-4">End Time</th>
                 <th class="p-4">Status</th>
                 <th class="p-4">Actions</th>
             </tr>
@@ -126,8 +136,10 @@
                     <tr class="border-t">
                         <td class="p-4">@reservation.Space.Name</td>
                         <td class="p-4">@reservation.User.FirstOrDefault()?.Name</td>
-                        <td class="p-4">@reservation.StartDate.ToString("dd/MM/yyyy HH:mm:ss")</td>
-                        <td class="p-4">@reservation.EndDate.ToString("dd/MM/yyyy HH:mm:ss")</td>
+                        <td class="p-4">@reservation.Date.ToString("dd/MM/yyyy")</td>
+                        <td class="p-4">@reservation.StartTime.ToString("HH:mm:ss")</td>
+                        <td class="p-4">@reservation.EndTime.ToString("HH:mm")</td>
+                        <td class="p-4">@Enum.GetValues(typeof(ReservationStatus)).GetValue((int)reservation.Status)</td>
                         <td class="p-4">
                             <a asp-controller="Reservation" 
                                asp-action="Edit" 
@@ -158,7 +170,7 @@
     </div>
 
 </div>
-
+@*
 @section Scripts {
     <script>
         const startInput = document.getElementById('StartDate');
@@ -174,4 +186,4 @@
             }
         });
     </script>
-}
+}*@
